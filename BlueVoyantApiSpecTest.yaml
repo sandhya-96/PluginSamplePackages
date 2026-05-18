@@ -1,0 +1,18 @@
+openapi: 3.0.0
+info:
+  title: Microsoft Entra ID Secure Score
+  description: Retrieve all available Secure Score control status and overview from Microsoft Entra ID.
+  version: "1.0.0"
+servers:
+  - url: https://graph.microsoft.com
+paths:
+  /beta/directory/recommendations:
+    get:
+      operationId: ListIdentityRecommendations
+      summary: Retrieve all available identity recommendations from Microsoft Entra ID.
+      description: The recommendations include the Recommendation Name, Description, Action Steps, Impact, and Last Updated Date.
+      responses:
+        200:
+          description: Successful retrieval.
+        401:
+          description: Unsuccessful authentication.
