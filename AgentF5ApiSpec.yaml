@@ -1,0 +1,170 @@
+openapi: 3.0.0
+
+info:
+  title: F5 Security Copilot API
+  description: The F5 Security Copilot API provides access to the weekly threat report.
+  version: 1.0.0
+
+
+paths:
+  /weekly-threat-report: 
+    get:
+      summary: Retrieve weekly threat report
+      description: Retrieve the weekly threat report from F5's threat intelligence data.
+      responses:
+        200:
+          description: A response object containing threat report items.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  threat_report_items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                          example: Microsoft and Steam Take Action As Unity Vulnerability Puts Games at Risk
+                        summary:
+                          type: string
+                          example: >-
+                            A high-severity vulnerability, CVE-2025-59489 (CVSS 8.4), has been identified
+                            in the Unity gaming and application editor, allowing attackers to load arbitrary
+                            libraries and achieve code execution. This flaw, stemming from Unity's command-line
+                            argument handling for debugging, enables malicious applications to inject specific
+                            arguments, potentially leading to local or remote code execution and access to
+                            confidential information on devices.
+                        emerged:
+                          type: string
+                          example: N/A
+                        urls:
+                          type: array
+                          items:
+                            type: string
+                          example:
+                            - https://buaq.net/go-367457.html
+                            - https://cyberinsider.com/unity-flaw-exposes-millions-of-gamers-to-code-execution-risk/
+                        severity:
+                          type: string
+                          example: Critical
+                        cves:
+                          type: array
+                          items:
+                            type: string
+                          example:
+                            - CVE-2025-59489
+                        malwareNames:
+                          type: array
+                          items:
+                            type: string
+                          example: []
+                        threatActors:
+                          type: array
+                          items:
+                            type: string
+                          example: []
+                        attackerCountries:
+                          type: array
+                          items:
+                            type: string
+                          example:
+                            - China
+                        iocHashes:
+                          type: array
+                          items:
+                            type: string
+                          example: []
+                        iocUrls:
+                          type: array
+                          items:
+                            type: string
+                          example:
+                            - intent:#Intent;package=com.example.unitygame;scheme=custom-scheme;S.unity=-xrsdk-pre-init-library%20/data/local/tmp/malicious.so;end;
+                        iocDomains:
+                          type: array
+                          items:
+                            type: string
+                          example: []
+                        iocIps:
+                          type: array
+                          items:
+                            type: string
+                          example: []
+                        iocEmails:
+                          type: array
+                          items:
+                            type: string
+                          example: []
+                        victimTechnologies:
+                          type: array
+                          items:
+                            type: string
+                          example:
+                            - Apple macOS
+                            - Google Android
+                            - Linux
+                            - Microsoft Windows
+                            - Steam
+                            - Unity
+                            - Unity Runtime
+                        victimIndustries:
+                          type: array
+                          items:
+                            type: string
+                          example:
+                            - Financial Services
+                            - Gaming
+                            - Interactive Entertainment
+                            - Software
+                        victimCountries:
+                          type: array
+                          items:
+                            type: string
+                          example:
+                            - China
+                            - Finland
+                            - Japan
+                            - Sweden
+                            - United Kingdom
+                            - United States
+                        shortTermAdvice:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              reasoning:
+                                type: string
+                                example: >-
+                                  This is a short-term action focused on immediate discovery and risk assessment.
+                                  The article states that "all applications built using Unity 2017.1 and later
+                                  for Android, Windows, macOS, and Linux are impacted" by CVE-2025-59489.
+                                  Identifying these applications is the first step to understanding the organization's exposure.
+                              advice_item:
+                                type: string
+                                example: >-
+                                  Conduct a software inventory scan across all corporate endpoints (Windows, macOS, Linux)
+                                  and mobile devices (Android) to identify any applications built with the Unity engine.
+                        longTermAdvice:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              reasoning:
+                                type: string
+                                example: >-
+                                  This is a long-term, strategic control because it requires policy creation, testing,
+                                  and phased deployment to prevent business disruption. The vulnerability can be triggered
+                                  by games or other non-standard applications, and the article notes an attacker could
+                                  use a "malicious application". An application control policy would proactively prevent
+                                  such unauthorized software from running, reducing the attack surface.
+                              advice_item:
+                                type: string
+                                example: >-
+                                  Implement an application control policy using a tool like Windows AppLocker or a
+                                  third-party solution to restrict the execution of unauthorized software, such as
+                                  games, on corporate endpoints.
+
+servers:
+  - url: https://f5-security-copilot.fletch.ai
